@@ -20,7 +20,7 @@ const OrganizationsDashboard = () => {
 
     const fetchOrganizations = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/organizations');
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/organizations`);
             const data = await response.json();
             if (data.success) {
                 setOrganizations(data.data);
@@ -35,7 +35,7 @@ const OrganizationsDashboard = () => {
 
     const fetchAllTransactions = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/v1/transactions');
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/transactions`);
             const data = await response.json();
             if (data.success) {
                 setTransactions(data.data);
@@ -47,7 +47,7 @@ const OrganizationsDashboard = () => {
 
     const fetchOrgTransactions = async (orgId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/organizations/${orgId}/transactions`);
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/organizations/${orgId}/transactions`);
             const data = await response.json();
             if (data.success) {
                 setTransactions(data.data);

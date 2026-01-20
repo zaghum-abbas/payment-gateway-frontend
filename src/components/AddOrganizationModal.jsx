@@ -29,7 +29,7 @@ const AddOrganizationModal = ({ isOpen, onClose, onSuccess }) => {
         setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/add-organization', {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/add-organization`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
