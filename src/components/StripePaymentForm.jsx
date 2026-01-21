@@ -76,26 +76,28 @@ const StripePaymentForm = ({ uuid, paymentData }) => {
                 },
             });
 
+            console.log('Payment Intent:', paymentIntent);
+
             if (error) {
                 console.error('Payment error:', error);
                 toast.error(error.message || 'Payment failed. Please try again.');
-            } else if (paymentIntent.status === 'succeeded') {
-                // 3. Update transaction status on success
-                await axios.patch(
-                    `${import.meta.env.VITE_BASE_URL}/api/v1/organizations/transaction/${uuid}`,
-                    {
-                        status: 'success',
-                        stripe_payment_id: paymentIntent.id,
-                    }
-                );
+            } else
+                if (paymentIntent.status === 'succeeded') {
+                    // await axios.patch(
+                    //     `${import.meta.env.VITE_BASE_URL}/api/v1/organizations/transaction/${uuid}`,
+                    //     {
+                    //         status: 'success',
+                    //         stripe_payment_id: paymentIntent.id,
+                    //     }
+                    // );
 
-                toast.success('Payment successful!');
+                    toast.success('Payment successful!');
 
-                // Redirect to success page or show success message
-                setTimeout(() => {
-                    navigate('/success', { state: { paymentIntent, orderData: paymentData } });
-                }, 1500);
-            }
+                    // Redirect to success page or show success message
+                    setTimeout(() => {
+                        navigate('/success', { state: { paymentIntent, orderData: paymentData } });
+                    }, 1500);
+                }
         } catch (error) {
             console.error('Payment processing error:', error);
             toast.error(error.response?.data?.error || 'Payment failed. Please try again.');
