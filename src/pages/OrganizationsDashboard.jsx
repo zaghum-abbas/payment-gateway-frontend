@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Plus, Building2, TrendingUp, DollarSign, Activity, Search, Filter, ChevronDown } from 'lucide-react';
 import toast from 'react-hot-toast';
 import AddOrganizationModal from '../components/AddOrganizationModal';
+import RefundModal from '../components/RefundModal';
 import './OrganizationsDashboard.css';
 
 const OrganizationsDashboard = () => {
@@ -9,6 +10,8 @@ const OrganizationsDashboard = () => {
     const [transactions, setTransactions] = useState([]);
     const [selectedOrg, setSelectedOrg] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isRefundModalOpen, setIsRefundModalOpen] = useState(false);
+    const [selectedTransaction, setSelectedTransaction] = useState(null);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
@@ -276,6 +279,7 @@ const OrganizationsDashboard = () => {
                                         <th>Status</th>
                                         <th>Provider</th>
                                         <th>Date</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -308,6 +312,19 @@ const OrganizationsDashboard = () => {
                                             <td className="date">
                                                 {formatDate(transaction.createdAt)}
                                             </td>
+                                            <td className="actions">
+                                                {transaction.stripe_payment_intent_id && <button
+                                                    className="refund-btn"
+                                                    onClick={() => {
+                                                        setIsRefundModalOpen(true);
+                                                        console.log('Refund button clicked', transaction);
+                                                        setSelectedTransaction(transaction);
+                                                        console.log('Modal should open now');
+                                                    }}
+                                                >
+                                                    Refund
+                                                </button>}
+                                            </td>
                                         </tr>
                                     ))}
                                 </tbody>
@@ -323,6 +340,21 @@ const OrganizationsDashboard = () => {
                 onSuccess={() => {
                     fetchOrganizations();
                     fetchAllTransactions();
+                }}
+            />
+
+            <RefundModal
+                isOpen={isRefundModalOpen}
+                onClose={() => {
+                    setIsRefundModalOpen(false);
+                    setSelectedTransaction(null);
+                }}
+                transaction={selectedTransaction}
+                onSuccess={() => {
+                    fetchAllTransactions();
+                    if (selectedOrg) {
+                        fetchOrgTransactions(selectedOrg);
+                    }
                 }}
             />
         </div>

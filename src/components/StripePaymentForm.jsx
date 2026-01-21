@@ -86,7 +86,7 @@ const StripePaymentForm = ({ uuid, paymentData }) => {
                     // await axios.patch(
                     //     `${import.meta.env.VITE_BASE_URL}/api/v1/organizations/transaction/${uuid}`,
                     //     {
-                    //         status: 'success',
+                    //         status: 'paid',
                     //         stripe_payment_id: paymentIntent.id,
                     //     }
                     // );

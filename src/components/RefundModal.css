@@ -1,0 +1,243 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.refund-modal {
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s;
+    color: #718096;
+}
+
+.close-btn:hover {
+    background: #f7fafc;
+    color: #1a202c;
+}
+
+.transaction-details {
+    padding: 20px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-label {
+    color: white;
+    font-size: 14px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.detail-value {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.refund-modal form {
+    padding: 24px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.2s;
+    font-family: inherit;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #a0aec0;
+}
+
+.input-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #718096;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.cancel-btn {
+    background: #f7fafc;
+    color: #4a5568;
+}
+
+.cancel-btn:hover:not(:disabled) {
+    background: #edf2f7;
+    transform: translateY(-1px);
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.modal-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Scrollbar styling */
+.refund-modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.refund-modal::-webkit-scrollbar-track {
+    background: #f7fafc;
+}
+
+.refund-modal::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+.refund-modal::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .refund-modal {
+        width: 95%;
+        max-height: 95vh;
+    }
+
+    .modal-header {
+        padding: 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 20px;
+    }
+
+    .transaction-details {
+        padding: 16px 20px;
+    }
+
+    .refund-modal form {
+        padding: 20px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+}
